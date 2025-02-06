@@ -26,9 +26,13 @@ class TestTextNode(unittest.TestCase):
 
     def test_repr(self):
         node = TextNode("This is a text node", TextType.TEXT, "https://www.boot.dev")
-        self.assertEqual(
-            "TextNode(This is a text node, text, https://www.boot.dev)", repr(node)
-        )
+        self.assertEqual("TextNode(This is a text node, text, https://www.boot.dev)", repr(node))
+
+
+    #def test_textnode_to_htmlnode(self):
+    #    textnode = TextNode("Bold Text", TextType.BOLD, "google")
+    #    self.assertEqual(textnode.text_node_to_html_node(), 'LeafNode("b", "Bold Text", "google")')
+        
 
 
 if __name__ == "__main__":
