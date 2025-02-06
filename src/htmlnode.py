@@ -58,9 +58,9 @@ class ParentNode(HTMLNode):
 
        
     def children_list(self):
-        if not isinstance(self.children, (list, LeafNode)):
+        if not isinstance(self.children, (list, LeafNode, ParentNode)):
             raise ValueError("Invalid HTML: child is not LeafNode(s)")
-        if isinstance(self.children, LeafNode):
+        if isinstance(self.children, (LeafNode, ParentNode)):
             return self.children.to_html()
         child_list = ""
         for child in self.children:

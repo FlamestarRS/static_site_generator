@@ -93,6 +93,10 @@ class TestParentNode(unittest.TestCase):
         )
         self.assertEqual(node.to_html(), '<pim a prop!!!><btextprop>Bold text</b>Normal text<i dict="prop">italic text</i>Normal text</p>')
 
+    def test_child_is_parentnode(self):
+        node = ParentNode("p", ParentNode("x", LeafNode("L", "Bold Text")))
+        self.assertEqual(node.to_html(), "<p><x><L>Bold Text</L></x></p>")
+
     def test_repr(self):
         node = ParentNode("tag", "value", "props")
         self.assertEqual(repr(node), "ParentNode(tag, value, props)")
