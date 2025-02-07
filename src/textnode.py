@@ -15,6 +15,16 @@ class TextNode:
         self.url = url
 
     def __eq__ (self, other):
+        
+        if isinstance(other, list):
+            for node in other:
+                return (
+                    self.text == node.text 
+                    and self.text_type == node.text_type
+                    and self.url == node.url
+                )
+
+        
         return (
             self.text == other.text 
             and self.text_type == other.text_type
