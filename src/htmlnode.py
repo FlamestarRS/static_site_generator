@@ -8,7 +8,7 @@ class HTMLNode:
     def to_html(self):
         raise NotImplementedError
     
-    def props_to_html(self):
+    def props_to_html(self):    # returns props in a list
         all_props = []
         if isinstance(self.props, str):
             return self.props
@@ -27,7 +27,7 @@ class LeafNode(HTMLNode):
     def __init__(self, tag, value, props=None):
         super().__init__(tag, value, None, props)
 
-    def to_html(self):
+    def to_html(self):      # returns formatted LeafNode
         if self.value == None:
             raise ValueError("Invalid HTML: no value")
         if self.tag == None:
@@ -45,7 +45,7 @@ class ParentNode(HTMLNode):
     def __init__(self, tag, children, props=None):
         super().__init__(tag, None, children, props)
 
-    def to_html(self):
+    def to_html(self):     # returns formatted ParentNode
         if self.tag == None:
             raise ValueError("Invalid HTML: no tag")
         if self.children == None:
@@ -64,7 +64,7 @@ class ParentNode(HTMLNode):
             return self.children.to_html()
         child_list = ""
         for child in self.children:
-            child_list += child.to_html()
+            child_list += child.to_html()   # recursive func for handling ParentNodes nested within ParentNodes
         return child_list
     
     def __repr__(self):

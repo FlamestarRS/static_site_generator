@@ -2,7 +2,7 @@ from textnode import *
 from htmlnode import *
 
 
-def text_node_to_html_node(text_node):
+def text_node_to_html_node(text_node):  # converts TextNodes to HTMLNodes for tagging
     match text_node.text_type:
         case TextType.TEXT:
             return LeafNode(None, text_node.text)
