@@ -17,13 +17,18 @@ def split_nodes_delimiter(old_nodes):
         else:
             delimiter_type = delimiter_to_TextType(delimiter[i])    # match case for delimiter
             node_text = old_nodes[i].text
-            split_node = node_text.split(delimiter[i])
-            if len(split_node) != 3:
+            if delimiter[i] == "":              # this makes multiple different inline elements work
+                new_nodes += [old_nodes[i]]
+                continue
+            split_node = node_text.split(delimiter[i])              # "" is added if inline element is at the start or end of text, Ex: text = "im **bold" becomes ["im ", "bold", ""]
+
+            if len(split_node) % 2 == 0:
                 raise ValueError("Invalid markdown: check delimiter placement")
-            new_node1 = TextNode(split_node[0], TextType.TEXT)
-            new_node2 = TextNode(split_node[1], delimiter_type) 
-            new_node3 = TextNode(split_node[2], TextType.TEXT)
-            new_nodes += [new_node1, new_node2, new_node3]
+            for i in range(0, len(split_node)):
+                if i % 2 == 0:
+                    new_nodes += [TextNode(split_node[i], TextType.TEXT)]   # even numbered list elements are text
+                if i % 2 != 0:
+                    new_nodes += [TextNode(split_node[i], delimiter_type)]  # odd numbered list elements require inline formatting
     return new_nodes
 
 def delimiter_to_TextType(delimiter):   # input is single markdown element
