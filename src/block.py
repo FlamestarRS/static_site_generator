@@ -1,5 +1,7 @@
 import re
 from htmlnode import *
+from textnode import *
+from delimiter import *
 
 def markdown_to_blocks(markdown):
     blocks = markdown.split("\n\n")
@@ -84,6 +86,9 @@ def markdown_to_html_node(markdown):
     markdown_blocks = markdown_to_blocks(markdown)
     for block in markdown_blocks:
         block_type = block_to_block_type(block)
-        node = HTMLNode()
+        match block_type:
+            case "heading":
+                text_node = 
+
 
 
