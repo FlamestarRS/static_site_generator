@@ -89,16 +89,6 @@ def markdown_to_html_node(markdown):
 
         block_type = block_to_block_type(block)
 
-        '''
-        if block_type != "unordered list":
-            text_nodes += text_to_textnodes(block)
-        elif block_type == "unordered list":
-            text_nodes += [TextNode(block, TextType.TEXT)]
-        
-        for text_node in text_nodes:
-            html_node = text_node_to_html_node(text_node)
-        '''
-
         match block_type:
             case "heading":
                 children.append(heading_to_html_node(block))
